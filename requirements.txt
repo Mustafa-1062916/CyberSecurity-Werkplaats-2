@@ -1,3 +1,4 @@
 Flask
 pi
 flask_login
+Flask-SQLAlchemy

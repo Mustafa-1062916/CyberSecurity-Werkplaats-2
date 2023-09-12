@@ -230,7 +230,7 @@ def signup_post():
     # haalt de data van de request op
     email = request.form.get('email')
     name = request.form.get('name')
-    password = request.form.get('password')
+    password = generate_password_hash(request.form.get('password'), method='sha256')
 
     user = User.query.filter_by(
         email=email).first()  # controlleert of de email al bestaat
@@ -244,7 +244,8 @@ def signup_post():
         return redirect(url_for('signup'))
 
     # maakt een nieuwe user aan met een gehased password.
-    new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
+    new_user = User(email = email, name = name, password = password)
+
 
     # voegt user toe aan db
     db.session.add(new_user)

@@ -20,7 +20,7 @@
     :root {
         --c2: #333;
         --c3: #1e1f20;
-        --c4: #fff;
+        --c4: #000;
     }
 }
 
@@ -28,7 +28,6 @@ html {
     height: 100%;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
-
 }
 
 /* General settings */
