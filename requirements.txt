@@ -2,3 +2,4 @@ Flask
 pi
 flask_login
 Flask-SQLAlchemy
+python-dotenv

@@ -10,11 +10,14 @@ from lib.tablemodel import DatabaseModel
 from lib.demodatabase import create_demo_database
 from flask_sqlalchemy import SQLAlchemy
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # This demo glues a random database and the Flask framework. If the database file does not exist,
 # a simple demo dataset will be created.
-LISTEN_ALL = "0.0.0.0"
+LISTEN_ALL = os.getenv("ENV_LISTEN_ALL")
 FLASK_IP = LISTEN_ALL
-FLASK_PORT = 81
+FLASK_PORT = os.getenv("ENV_FLASK_PORT")
 FLASK_DEBUG = True
 
 app = Flask(__name__)
@@ -24,14 +27,14 @@ login_manager.login_view = 'login'
 login_manager.login_message = "De gebruiker moet ingelogd zijn om deze pagina te bekijken"
 
 # Secret key voor de session
-app.secret_key = '1335eb3948fb7b64a029aa29'
+app.secret_key = os.getenv("ENV_SECRETKEY")
 
 # This command creates the "<application directory>/databases/testcorrect_vragen.db" path
 db = SQLAlchemy()
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(app.root_path, 'databases', 'testcorrect_vragen.db')
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(app.root_path, 'databases', os.getenv("ENV_DATABASENAME"))
 db.init_app(app)
 
-DATABASE_FILE = os.path.join(app.root_path, 'databases', 'testcorrect_vragen.db')
+DATABASE_FILE = os.path.join(app.root_path, 'databases', os.getenv("ENV_DATABASENAME"))
 
 # Check if the database file exists. If not, create a demo database
 if not os.path.isfile(DATABASE_FILE):
